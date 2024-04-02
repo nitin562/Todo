@@ -63,7 +63,7 @@ export default function Home() {
           </button>
         </div>
       </div>
-      <div className="w-full md:w-3/4 mx-auto py-4 flex flex-col gap-y-8  px-3 md:px-7 flex-1 bg-stone-900 scrollbar overflow-y-scroll overflow-x-hidden">
+      <div className="w-full md:w-3/4 mx-auto pt-8 flex flex-col gap-y-8  px-5 md:px-7 flex-1 bg-stone-900 scrollbar overflow-y-scroll overflow-x-hidden">
         {/* Showing todos here */}
         {todoState.map((todo) => { 
           return (
