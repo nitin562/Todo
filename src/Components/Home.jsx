@@ -7,36 +7,34 @@ import { deleteAll, setTodoArr } from "../app/reducers";
 import AlertComp from "./AlertComp";
 
 export default function Home() {
-  const [show, setshow] = useState(false);
-  const [openAlert, setopenAlert] = useState(false);
-  const dispatch = useDispatch();
-  const AddTodo = () => setshow(true);
-  const todoState = useSelector((state) => state.todos);
-  const handleLoad = () => {
+  const [show, setshow] = useState(false);  //open modal
+  const [openAlert, setopenAlert] = useState(false); //open Alert message
+  const dispatch = useDispatch(); //use to change state in store
+  const AddTodo = () => setshow(true); //open modal
+  const todoState = useSelector((state) => state.todos); //getting state
+  const handleLoad = () => {  //loading if already todos are present in local storage
     if (localStorage.getItem("Todos")) {
       const todoArr = JSON.parse(localStorage.getItem("Todos"));
       dispatch(setTodoArr(todoArr));
     }
   };
-  const handleReload = () => {
+  const handleReload = () => { //storing in local storage on refresh
     const objToString = JSON.stringify(todoState);
     localStorage.setItem("Todos", objToString);
   };
-  const handleSave = () => {
+  const handleSave = () => { //Manually storing by save button in localStorage
     handleReload();
     setopenAlert(true);
     setTimeout(() => {
       setopenAlert(false);
     }, 2000);
   };
-  useEffect(() => {
+  useEffect(() => { //loading todos on mounting
     handleLoad();
   }, []);
-  useEffect(() => {
-    // handleLoad()
+  useEffect(() => { //adding eventlistener for refreshing browser to save todos
     window.addEventListener("beforeunload", handleReload);
     return () => {
-      console.log(todoState);
       window.removeEventListener("beforeunload", handleReload);
     };
   }, [todoState]);
@@ -48,6 +46,7 @@ export default function Home() {
           to<span className="text-emerald-400 ">do</span>s
         </p>
         <div className="flex gap-x-4">
+          {/* Save and delete all button */}
           <button
             className="border-[1px] text-2xl p-2 rounded-lg border-white hover:bg-sky-800 hover:text-sky-400 font-thin text-white"
             style={{ fontFamily: "ubuntu" }}
@@ -65,7 +64,8 @@ export default function Home() {
         </div>
       </div>
       <div className="w-full md:w-3/4 mx-auto py-4 flex flex-col gap-y-8  px-3 md:px-7 flex-1 bg-stone-900 scrollbar overflow-y-scroll overflow-x-hidden">
-        {todoState.map((todo) => {
+        {/* Showing todos here */}
+        {todoState.map((todo) => { 
           return (
             <Todotitle
               key={todo.id}
@@ -76,7 +76,7 @@ export default function Home() {
           );
         })}
       </div>
-
+        {/* Add button to add todo */}
       <Add show={show} changeShow={setshow} />
       <button
         className="w-[3.5rem] absolute bottom-4 right-4 hover:scale-110 transition-all duration-300 rounded-full "

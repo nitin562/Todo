@@ -3,20 +3,19 @@ import { useDispatch } from "react-redux";
 import { removeTodo, updateTodo } from "../app/reducers";
 
 export default function Todotitle({ id, text, checked }) {
-  const [pop, setpop] = useState(false);
-  const [check, setcheck] = useState(checked);
-  const dispatch = useDispatch();
-  const onCheck = () => {
-    console.log("checked")
+  const [pop, setpop] = useState(false); //to popover delete icon on hover
+  const [check, setcheck] = useState(checked); //check marks state
+  const dispatch = useDispatch(); 
+  const onCheck = () => { //on change in check, updating its todo in store
     dispatch(updateTodo({check,todoId:id}));
   };
-  useEffect(()=>{
+  useEffect(()=>{ //on every change in check, update todo in store
     if(check===checked){
       return
     }
     onCheck()
   },[check])
-  const handleDelete=()=>{
+  const handleDelete=()=>{ //delete a todo by reducer removeTodo
     dispatch(removeTodo(id))
   }
   return (

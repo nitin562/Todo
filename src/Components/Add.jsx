@@ -4,17 +4,16 @@ import Modal from "react-bootstrap/Modal";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../app/reducers";
 export default function Add({ show, changeShow }) {
-  const [todo, settodo] = useState("");
-  const handleClose = () => changeShow(false);
-  const dispatch=useDispatch()
-  const handleSave=()=>{
-
+  const [todo, settodo] = useState(""); //todo textarea
+  const handleClose = () => changeShow(false); //close the modal
+  const dispatch=useDispatch() 
+  const handleSave=()=>{  //Save the todo using reducer
     dispatch(addTodo({todo,check:false}))
     settodo('')
     changeShow(false)
   }
   return (
-    <Modal
+    <Modal //bootstrap
       show={show}
       onHide={handleClose}
       size="lg"
@@ -36,11 +35,12 @@ export default function Add({ show, changeShow }) {
         ></textarea>
       </Modal.Body>
       <Modal.Footer>
+        {/* Close and save todo buttons in footer */}
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleSave}>
-          Save Todo
+        <Button variant="primary" onClick={handleSave}> 
+          Save Todo 
         </Button>
       </Modal.Footer>
     </Modal>

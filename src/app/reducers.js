@@ -1,44 +1,40 @@
 import { createSlice,nanoid } from "@reduxjs/toolkit";
 
-const initialState={
+const initialState={ //initial state to show sample todo
     todos:[{id:1,todo:"Sample Todo",check:false}]
 }
-const todoSlice=createSlice({
+const todoSlice=createSlice({ //creating a reducer having function to update states
     name:"todo",
     initialState,
     reducers:{
-        addTodo:(state,action)=>{
-            const{todo,check}=action.payload
+        addTodo:(state,action)=>{//Adding a todo
+            const{todo,check}=action.payload //assuming payload contains todo and check, bydefault check is false
             const newTodo={
-                id:nanoid(),
+                id:nanoid(), //unique id
                 todo,check
             }
-            state.todos.push(newTodo)
+            state.todos.push(newTodo) //pushing new todo
         },
-        removeTodo:(state,action)=>{
-            console.log(action)
+        removeTodo:(state,action)=>{ //remove a todo by getting its id
             state.todos=state.todos.filter((todo)=>{
                 return todo.id !==action.payload
             })
         },
-        updateTodo:(state,action)=>{
-            console.log(action.payload)
-            const {check,todoId}=action.payload
+        updateTodo:(state,action)=>{ //update a todo, mainly its check update
+            const {check,todoId}=action.payload //its check:bool and todoId to find todo in store
             for (let index = 0; index < state.todos.length; index++) {
                 const element = state.todos[index];
                 if(element.id===todoId){
-                    console.log("found")
-                    state.todos[index].check=check
+                    state.todos[index].check=check //on found, change check
                     return
                 }
                 
             }
-            console.log(state.todos)
         },
-        setTodoArr:(state,action)=>{
+        setTodoArr:(state,action)=>{ //setting a complete todoarr to state
             state.todos=action.payload
         },
-        deleteAll:(state,action)=>{
+        deleteAll:(state,action)=>{ //delete all todos by setting state to empty array
             state.todos=[]
         }
     }
