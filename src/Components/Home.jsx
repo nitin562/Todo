@@ -48,14 +48,14 @@ export default function Home() {
         <div className="flex gap-x-4">
           {/* Save and delete all button */}
           <button
-            className="border-[1px] text-2xl p-2 rounded-lg border-white hover:bg-sky-800 hover:text-sky-400 font-thin text-white"
+            className="border-[1px] text-md md:text-2xl px-2 p-1 md:p-2 rounded-lg border-white hover:bg-sky-800 hover:text-sky-400 font-thin text-white"
             style={{ fontFamily: "ubuntu" }}
             onClick={handleSave}
           >
             Save
           </button>
           <button
-            className="w-fit border-[1px] text-2xl p-2 rounded-lg border-red-500 hover:bg-red-600 font-thin hover:text-white text-white"
+            className="w-fit border-[1px] text-md md:text-2xl p-2 rounded-lg border-red-500 hover:bg-red-600 font-thin hover:text-white text-white"
             style={{ fontFamily: "ubuntu" }}
             onClick={()=>dispatch(deleteAll())}
           >
